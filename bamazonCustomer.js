@@ -81,12 +81,30 @@ function custPurchase() {
 							}
 					])
 					.then(function (answer) {
-						purchaseItem(answer.buyID, numUnits)
+						connection.query("SELECT * FROM products WHERE id = ?", [answer.buyID], function (error, result) {
+							var currNumItems = result[0].stock_quantity;
+							var currItemName = result[0].product_name;
+
+							purchaseItem(currItemName, answer.buyID, answer.numUnits, currNumItems);
+						})
+
 					})
 			}
 			// Terminates the connection since it is not needed anymore	
 			else {
 				connection.end();
 			}
+	})
+}
+
+// Function that takes the selected item and subtracts it from the quantity in the db
+function purchaseItem(name, item, units, currUnits) {
+	var query = "UPDATE products SET ? WHERE ?";
+	var newNumUnits = currUnits - units;
+
+	connection.query(query, [{stock_quantity: newNumUnits}], function (error) {
+		console.log(chalk.green("Thanks for the purchase. You have just purchased " + units + " " + name + ". There are now " + newNumUnits + " " + name + " remaining."));
+
+		custPurchase();
 	})
 }
