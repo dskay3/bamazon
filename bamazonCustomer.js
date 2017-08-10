@@ -84,8 +84,9 @@ function custPurchase() {
 						connection.query("SELECT * FROM products WHERE id = ?", [answer.buyID], function (error, result) {
 							var currNumItems = result[0].stock_quantity;
 							var currItemName = result[0].product_name;
+							var currPrice = result[0].price;
 
-							purchaseItem(currItemName, answer.buyID, answer.numUnits, currNumItems);
+							purchaseItem(currItemName, answer.buyID, answer.numUnits, currNumItems, currPrice);
 						})
 
 					})
@@ -100,9 +101,10 @@ function custPurchase() {
 }
 
 // Function that takes the selected item and subtracts it from the quantity in the db
-function purchaseItem(name, itemNum, units, currUnits) {
+function purchaseItem(name, itemNum, units, currUnits, currPrice) {
 	var query = "UPDATE products SET ? WHERE ?";
 	var newNumUnits = currUnits - units;
+	var totalPrice = currPrice * units;
 
 	if (newNumUnits >= 0) {
 		connection.query(query, [
@@ -114,7 +116,7 @@ function purchaseItem(name, itemNum, units, currUnits) {
 			}
 		], function (error) {
 			console.log(chalk.green(dashes));
-			console.log(chalk.green("Thanks for the purchase. You have just purchased " + units + " " + name + ". There are now " + newNumUnits + " " + name + " remaining."));
+			console.log(chalk.green("Thanks for the purchase. You have just purchased " + units + " " + name + " for a total of $" + totalPrice + ". There are now " + newNumUnits + " " + name + " remaining."));
 			console.log(chalk.green(dashes));
 
 			custPurchase();

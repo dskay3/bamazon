@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS products (
 	id INTEGER(11) AUTO_INCREMENT NOT NULL,
     product_name VARCHAR(40) NOT NULL,
     department_name VARCHAR(30),
-    price INTEGER(11) NOT NULL,
+    price FLOAT(11) NOT NULL,
     stock_quantity INTEGER(200) NOT NULL,
     PRIMARY KEY (id)
 );
@@ -52,7 +52,7 @@ VALUES ("Baby Boy Clothes Long", "Baby Clothes", 8, 22);
 
 -- Tenth product
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("Kindle Fire", "Electronics", 159.97, 101);
+VALUES ("Kindle Fire", "Electronics", 160, 101);
 
 -- Eleventh product. Demo of 0 stock_quantity.
 INSERT INTO products (product_name, department_name, price, stock_quantity)
