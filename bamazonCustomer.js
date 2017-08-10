@@ -32,7 +32,7 @@ function initialRun() {
             console.log(chalk.bold(result[i].id + " | ") + result[i].product_name + " ---- $" + chalk.red(result[i].price));
         }
 
-        // Purchase
+        console.log(chalk.green(dashes));
         custPurchase();
     });
 };
@@ -50,34 +50,36 @@ function custPurchase() {
             ]
         })
         .then(function (answer) {
-            inquirer
-                .prompt([
-                    {
-                        name: "buy",
-                        type: "input",
-                        message: "Please enter the ID of the product you would like to buy: ",
-                        validate: function (value) {
-                            if (isNaN(value) === false) {
-                                return true;
+            if (answer.options === "Yes") {
+                inquirer
+                    .prompt([
+                        {
+                            name: "buy",
+                            type: "input",
+                            message: "Please enter the ID of the product you would like to buy: ",
+                            validate: function (value) {
+                                if (isNaN(value) === false) {
+                                    return true;
+                                }
+                                return false;
                             }
-                            return false;
-                        }
-                    },
-                    {
-                        name: "numberOfUnits",
-                        type: "input",
-                        message: "How many would you like to buy?: ",
-                        validate: function (value) {
-                            if (isNaN(value) === false) {
-                                return true;
+                        },
+                        {
+                            name: "numberOfUnits",
+                            type: "input",
+                            message: "How many would you like to buy?: ",
+                            validate: function (value) {
+                                if (isNaN(value) === false) {
+                                    return true;
+                                }
+                                return false;
                             }
-                            return false;
                         }
-                    }
-                ])
-                .then(function (answer) {
-                    console.log(answer.buy + " " + answer.numberOfUnits);
-                })
-        })
+                    ])
+                    .then(function (answer) {
+                        console.log(answer.buy + " " + answer.numberOfUnits);
+                    })
+                }
+            })
 
 }
