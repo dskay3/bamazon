@@ -104,7 +104,7 @@ function purchaseItem(name, itemNum, units, currUnits) {
 	var query = "UPDATE products SET ? WHERE ?";
 	var newNumUnits = currUnits - units;
 
-	if (newNumUnits > 0) {
+	if (newNumUnits >= 0) {
 		connection.query(query, [
 			{
 				stock_quantity: newNumUnits
