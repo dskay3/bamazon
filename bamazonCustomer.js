@@ -92,19 +92,39 @@ function custPurchase() {
 			}
 			// Terminates the connection since it is not needed anymore	
 			else {
+				console.log(chalk.green(dashes));
+				console.log(chalk.blue("Thank you for your time. Goodbye."));
 				connection.end();
 			}
 	})
 }
 
 // Function that takes the selected item and subtracts it from the quantity in the db
-function purchaseItem(name, item, units, currUnits) {
+function purchaseItem(name, itemNum, units, currUnits) {
 	var query = "UPDATE products SET ? WHERE ?";
 	var newNumUnits = currUnits - units;
 
-	connection.query(query, [{stock_quantity: newNumUnits}], function (error) {
-		console.log(chalk.green("Thanks for the purchase. You have just purchased " + units + " " + name + ". There are now " + newNumUnits + " " + name + " remaining."));
+	if (newNumUnits > 0) {
+		connection.query(query, [
+			{
+				stock_quantity: newNumUnits
+			},
+			{
+				id: itemNum
+			}
+		], function (error) {
+			console.log(chalk.green(dashes));
+			console.log(chalk.green("Thanks for the purchase. You have just purchased " + units + " " + name + ". There are now " + newNumUnits + " " + name + " remaining."));
+			console.log(chalk.green(dashes));
+
+			custPurchase();
+		})
+	}
+	else {
+		console.log(chalk.green(dashes));
+		console.log(chalk.red("Insufficient quantity! Purchasing of this item is not currently available. Purchasing will be available once product is back in stock."));
+		console.log(chalk.green(dashes));
 
 		custPurchase();
-	})
+	}
 }
