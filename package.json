@@ -1,0 +1,27 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "Bamazon NPM install package.",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dskay3/bamazon.git"
+  },
+  "keywords": [
+    "bamazon"
+  ],
+  "author": "Daniel Kim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dskay3/bamazon/issues"
+  },
+  "homepage": "https://github.com/dskay3/bamazon#readme",
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "inquirer": "^3.2.1",
+    "mysql": "^2.14.1"
+  }
+}
