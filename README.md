@@ -17,7 +17,7 @@ A demostration of this node application can be found in the following YouTube li
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=rYx5-P-jJSI
 " target="_blank"><img src="http://img.youtube.com/vi/rYx5-P-jJSI/0.jpg" 
-alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+alt="bamazon" width="240" height="180" border="10" /></a>
 
 Hope you enjoy!
 Thanks!
